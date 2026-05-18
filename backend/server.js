@@ -13,8 +13,6 @@ const app = express();
 // add cors
 app.use(cors({
   origin: ['http://localhost:5173', 'https://user-management-app-tau-henna.vercel.app'],
-  methods: ['GET','POST','PATCH','DELETE','PUT','OPTIONS'],
-  credentials: true,
 }))
 
 // Add body parser middleware
