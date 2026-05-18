@@ -12,7 +12,7 @@ const app = express();
 
 // add cors
 app.use(cors({
-  origin: ['http://localhost:5173']
+  origin: ['http://localhost:5173',"https://user-management-app-tau-henna.vercel.app/"]
 }))
 
 // Add body parser middleware
