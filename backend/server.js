@@ -11,7 +11,21 @@ config(); //process.env
 const app = express();
 
 // add cors
-app.use(cors())
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://user-management-app-tau-henna.vercel.app',
+]
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('CORS policy: Origin not allowed'))
+    }
+  },
+  methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT', 'OPTIONS'],
+  credentials: true,
+}))
 
 // Add body parser middleware
 app.use(express.json())
