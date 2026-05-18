@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router'
-const API = import.meta.env.VITE_API_URL?.trim();
+const API = import.meta.env.VITE_API_URL?.trim().replace(/\/$/, '');
 
 function AddUser() {
     const {register, handleSubmit, formState: {errors}} = useForm()
@@ -14,6 +14,7 @@ function AddUser() {
 
         // make HTTP POST req to create new user
         try{
+            if(!API) throw new Error("Backend API URL is not configured.")
             let res = await fetch(`${API}/user-api/users`, {
                 method: "POST",
                 headers: {
@@ -21,12 +22,11 @@ function AddUser() {
                 },
                 body: JSON.stringify(newUser)
             })
-            if(res.status===201){
-                // user created, it should navigate to UsersList component
-                navigate('/users-list')
-            }else{
-                throw new Error("error occurred")
+            if(!res.ok){
+                const text = await res.text()
+                throw new Error(text || `Request failed with ${res.status}`)
             }
+            navigate('/users-list')
         }catch(err){
             setError(err)
         }finally{

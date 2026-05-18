@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
-const API = import.meta.env.VITE_API_URL?.trim();
+const API = import.meta.env.VITE_API_URL?.trim().replace(/\/$/, '');
 
 function UsersList() {
 
@@ -13,15 +13,16 @@ function UsersList() {
         setLoading(true)
         async function getUsers(){
             try{
+                if(!API) throw new Error("Backend API URL is not configured.")
                 let res = await fetch(`${API}/user-api/users`,{
                     method: "GET"
                 })
-                if(res.status===200){
-                    let resObj = await res.json();
-                    setUsers(resObj.payload)
-                }else{
-                    throw new Error("error occurred")
+                if(!res.ok){
+                    const text = await res.text()
+                    throw new Error(text || `Request failed with ${res.status}`)
                 }
+                let resObj = await res.json();
+                setUsers(resObj.payload)
             }catch(err){
                 setError(err)
             }finally{

@@ -11,9 +11,7 @@ config(); //process.env
 const app = express();
 
 // add cors
-app.use(cors({
-  origin: ['http://localhost:5173', 'https://user-management-app-tau-henna.vercel.app'],
-}))
+app.use(cors())
 
 // Add body parser middleware
 app.use(express.json())
