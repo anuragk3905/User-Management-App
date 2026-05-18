@@ -37,7 +37,7 @@ function UsersList() {
         return <p className='text-center text-red-400 text-3xl'>{error.message}</p>
     }
 
-    const gotoUser=(userObj)=>{
+    const gotoUser = (userObj) => {
         navigate('/user', { state: { user: userObj } })
     }
 
@@ -46,7 +46,7 @@ function UsersList() {
         <h1 className='text-5xl text-gray-600 mb-8'>List of Users</h1>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10'>
             {
-                users?.map(userObj=><div key={userObj.email} className='p-10  shadow-2xl cursor-pointer' onClick={() => gotoUser(userObj)}>
+                users?.map(userObj=><div key={userObj.email} className='p-10 shadow-2xl cursor-pointer' onClick={() => gotoUser(userObj)}>
                     <p className='text-3xl'>{userObj.name}</p>
                     <p className='text-2xl'>{userObj.email}</p>
                 </div>)

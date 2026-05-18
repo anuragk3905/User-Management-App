@@ -1,7 +1,6 @@
 import React from 'react'
 import RootLayout from './components/RootLayout'
 import {createBrowserRouter, RouterProvider} from 'react-router'
-import Home from './components/Home'
 import AddUser from './components/AddUser'
 import UsersList from './components/UsersList'
 import User from './components/User'
@@ -14,7 +13,7 @@ function App() {
       children:[
         {
           path:"",
-          element: <Home/>
+          element: <UsersList/>
         },
         {
           path:"add-user",
