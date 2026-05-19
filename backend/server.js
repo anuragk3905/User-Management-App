@@ -37,17 +37,19 @@ app.use('/user-api', userRoute)
 const connectDB = async()=>{
     try{
         await connect(process.env.DB_URL)
-        console.log("DB Connection Succesful")
-        //start http server
-        app.listen(process.env.PORT,()=>console.log("Server started"))
+        console.log("DB Connection Successful")
+        const port = process.env.PORT || 3000
+        app.listen(port,()=>console.log(`Server started on port ${port}`))
     }catch(err){
-        console.log("Err in DB connection",err)
+        console.error("Err in DB connection",err)
+        process.exit(1)
     }
 }
 connectDB();
 
 // Add error handling middleware
 app.use((err, req, res, next) => {
+  console.error('Unhandled server error:', err)
   // Mongoose validation error
   if (err.name === "ValidationError") {
     return res.status(400).json({
@@ -65,9 +67,10 @@ app.use((err, req, res, next) => {
   if (err.code === 11000) {
     return res.status(409).json({
       message: "Duplicate field value",
+      error: err.keyValue,
     });
   }
-  res.status(500).json({
-    message: "Internal Server Error",
+  res.status(err.status || 500).json({
+    message: err.message || "Internal Server Error",
   });
 });

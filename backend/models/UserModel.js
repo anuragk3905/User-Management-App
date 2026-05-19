@@ -9,14 +9,20 @@ const userSchema = new Schema({
     email:{
         type : String,
         required : [true, "Email is required"],
-        unique : [true, "Email already exists"]
+        unique : [true, "Email already exists"],
+        trim: true,
+        lowercase: true,
+        match: [/^[^\s@]+@[^\s@]+\.[^\s@]+$/, 'Please enter a valid email address']
     },
     dateOfBirth:{
         type : Date,
         required : [true, "Date of birth is required"]
     },
     mobileNumber:{
-        type : Number
+        type : String,
+        required: [true, 'Mobile number is required'],
+        trim: true,
+        match: [/^[0-9]{10}$/, 'Mobile number must be exactly 10 digits']
     },
     status:{
         type : Boolean,

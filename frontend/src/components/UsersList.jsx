@@ -56,8 +56,8 @@ function UsersList() {
                     const statusClass = isActive ? 'text-green-600' : 'text-red-600'
                     return (
                       <div key={userObj._id} className='p-8 shadow-2xl cursor-pointer border rounded-xl hover:shadow-xl' onClick={() => gotoUser(userObj)}>
-                        <p className='text-3xl'>{userObj.name}</p>
-                        <p className='text-2xl mb-3'>{userObj.email}</p>
+                        <p className='text-3xl break-words'>{userObj.name}</p>
+                        <p className='text-2xl mb-3 break-words overflow-hidden text-ellipsis'>{userObj.email}</p>
                         <p className={`text-xl font-semibold ${statusClass}`}>Status: {statusText}</p>
                       </div>
                     )
