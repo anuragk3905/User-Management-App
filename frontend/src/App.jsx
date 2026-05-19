@@ -2,6 +2,7 @@ import React from 'react'
 import RootLayout from './components/RootLayout'
 import {createBrowserRouter, RouterProvider} from 'react-router'
 import AddUser from './components/AddUser'
+import EditUser from './components/EditUser'
 import UsersList from './components/UsersList'
 import User from './components/User'
 
@@ -24,8 +25,12 @@ function App() {
           element: <UsersList/>
         },
         {
-          path:"user",
+          path:"user/:id",
           element: <User/>
+        },
+        {
+          path:"edit-user/:id",
+          element: <EditUser/>
         }
       ]
     }

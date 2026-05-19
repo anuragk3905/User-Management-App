@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import {useForm} from 'react-hook-form'
 import { useNavigate } from 'react-router'
-const API = import.meta.env.VITE_API_URL?.trim().replace(/\/$/, '');
+const API = import.meta.env.VITE_API_URL?.trim().replace(/\/$/, '') || 'http://localhost:3000';
 
 function AddUser() {
     const {register, handleSubmit, formState: {errors}} = useForm()
