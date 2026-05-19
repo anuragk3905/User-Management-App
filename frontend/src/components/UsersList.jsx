@@ -47,7 +47,7 @@ function UsersList() {
   return (
     <div> 
         <h1 className='text-5xl text-gray-600 mb-8'>List of Users</h1>
-        <p className='mb-6 text-lg text-slate-600'>Showing all users, including inactive ones. Click a user card to view details and manage their status.</p>
+        <p className='mb-6 text-lg text-slate-600'>Click a user card to view details and manage their status.</p>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10'>
             {
                 users?.map(userObj=>{
